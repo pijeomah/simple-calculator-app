@@ -1,0 +1,91 @@
+/* Box Model Hack */
+*, *::before,*::after {
+     box-sizing: border-box;
+     font-weight: normal;
+     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+     content: ".";
+     display: block;
+     clear: both;
+     visibility: hidden;
+     line-height: 0;
+     height: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+     margin: 0;
+     padding: 0;
+     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(10,10,46,1) 54%, rgba(0,212,255,1) 100%);
+}
+
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+.calculator-grid{
+     display: grid;
+     justify-content: center;
+     align-content: center;
+     min-height: 100vh;
+     grid-template-columns: repeat(4, 100px);
+     grid-template-rows: minmax(120px auto) repeat(5, 100px);
+    
+}
+
+.calculator-grid > button{
+     font-size: 2rem;
+     outline: none;
+     cursor: pointer;
+     border: 1px solid #fff;
+     background: rgba(255, 255, 255, 0.75);
+     height: 5rem;
+     
+
+}
+
+.calculator-grid > button:hover{
+     background-color: #a9a9a9;
+}
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+
+.span-two{
+     grid-column: span 2;
+     color: #1d463163;
+     background-color: rgba(116, 8, 116, 0.6);
+}
+
+.output{
+      grid-column: 1/-1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-around;
+      background-color: rgba(230, 193, 193, 0.75);
+      flex-direction: column;
+      padding: 2rem;
+      word-wrap: break-word;
+      word-break: break-all;
+      
+}
+
+.output .previous-operand{
+     color: rgba(255, 255, 255, 0.75);
+     font-size: 1.5rem;
+}
+
+.output .current-operand{
+     color: rgba(255, 255, 255, 0.75);
+     font-size: 2rem;
+}
