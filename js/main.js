@@ -26,11 +26,11 @@ class Calculator{
 
    }
 
-   appendNumber(){
-
+   appendNumber(number){
+    if(number === '.' && this.currOperand.includes('.')) return
+    this.currOperand = this.currOperand.toString() + number.toString()
    }
-
-   chooseOperation(){
+   chooseOperation(operations){
 
    }
 
@@ -39,7 +39,7 @@ class Calculator{
    }
 
    updateDisplay(){
-
+    this.currOperandTextElement.innerText = this.currOperand
    }
 }
 
@@ -48,5 +48,6 @@ const calc = new Calculator(prevOperandTextElement, currOperandTextElement)
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         calc.appendNumber(button.innerText)
+        calc.updateDisplay()
     })
 })
