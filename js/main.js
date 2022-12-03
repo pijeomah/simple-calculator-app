@@ -70,10 +70,31 @@ class Calculator{
     this.operation = undefined
     this.prevOperand = ''
    }
+   getDisplayNumber(number){
+    let stringNumber = number.toString()
+    let integerDigits = parseFloat(stringNumber.split('.')[0])
+    let decimalDigits = stringNumber.split('.')[1]
+    let integerDisplay
+    if(isNaN(integerDigits)){
+        integerDisplay = ''
+    }else{
+        integerDisplay = integerDigits.toLocaleString('en', {
+            maximumFractionDigits : 0})
+    }
+    if(decimalDigits != null){
+       return `${integerDisplay}.${decimalDigits}`
+    }else{ return integerDisplay }
+   }
+
+
 
    updateDisplay(){
-    this.currOperandTextElement.innerText = this.currOperand
-    this.prevOperandTextElement.innerText = this.prevOperand
+    this.currOperandTextElement.innerText = this.getDisplayNumber(this.currOperand)
+    if(this.operation != null){
+        this.prevOperandTextElement.innerText = `${this.getDisplayNumber(this.prevOperand)} ${this.operation}`
+    }else {
+        this.prevOperandTextElement.innerText = ''
+    }
    }
 }
 
