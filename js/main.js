@@ -23,23 +23,57 @@ class Calculator{
    }
 
    delete(){
-
+    this.currOperand = this.currOperand.toString().slice(0, -1)
    }
 
    appendNumber(number){
     if(number === '.' && this.currOperand.includes('.')) return
     this.currOperand = this.currOperand.toString() + number.toString()
    }
-   chooseOperation(operations){
+   chooseOperation(operation){
+    if(this.currOperand === "") return
+    if(this.prevOperand !== ""){
+        calc.compute()
+        calc.updateDisplay()    
+        
+    }
+    this.operation = operation 
+    this.prevOperand = this.currOperand
+    this.currOperand = ''
 
    }
 
    compute(){
+    let computation
+    let prev = parseFloat(this.prevOperand)
+    let curr = parseFloat(this.currOperand)
+    if(isNaN(prev) || isNaN(curr)) return
+    switch(this.operation){
+        case '+': 
+        computation =prev + curr
+        break
 
+        case '-':
+        computation = prev - curr
+        break
+
+        case '*':
+        computation = prev * curr
+        break
+
+        case '÷':
+            conputation = prev/curr
+            break
+
+    }
+    this.currOperand = computation
+    this.operation = undefined
+    this.prevOperand = ''
    }
 
    updateDisplay(){
     this.currOperandTextElement.innerText = this.currOperand
+    this.prevOperandTextElement.innerText = this.prevOperand
    }
 }
 
@@ -51,3 +85,28 @@ numberButtons.forEach(button => {
         calc.updateDisplay()
     })
 })
+
+
+operationsButtons.forEach(button => {
+    button.addEventListener('click' , () =>{
+        calc.chooseOperation(button.innerText)
+        calc.updateDisplay()
+    })
+})
+
+
+equalsButton.addEventListener('click', () => {
+    calc.compute()
+    calc.updateDisplay()
+
+})
+
+allClearButton.addEventListener('click', () => {
+    calc.clear()
+    calc.updateDisplay()
+})
+
+ deleteButtton.addEventListener('click', () => {
+    calc.delete()
+    calc.updateDisplay()
+ })
